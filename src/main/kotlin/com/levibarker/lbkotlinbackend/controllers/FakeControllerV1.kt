@@ -1,7 +1,6 @@
 package com.levibarker.lbkotlinbackend.controllers
 
-import com.levibarker.lbkotlinbackend.UserService
-import com.levibarker.lbkotlinbackend.models.User
+import com.levibarker.lbkotlinbackend.services.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
@@ -10,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("fake")
+@RequestMapping("v1/fake")
 @CrossOrigin
-class FakeController(private val userService: UserService) {
+class FakeControllerV1(private val userService: UserService) {
 
     @GetMapping("/ok")
     fun getOkResponse(): ResponseEntity<Any> {
