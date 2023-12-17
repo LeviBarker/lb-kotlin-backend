@@ -3,7 +3,7 @@ WORKDIR /home/gradle/project
 COPY build.gradle.kts settings.gradle.kts ./
 RUN gradle clean build --no-daemon > /dev/null 2>&1 || true
 COPY . .
-RUN gradle build -x test
+RUN gradle build -x test --no-daemon > /dev/null 2>&1 || true
 
 FROM openjdk:latest
 ENV JAR_NAME=lb-kotlin-backend-0.0.1-SNAPSHOT.jar
