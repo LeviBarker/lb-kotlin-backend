@@ -1,17 +1,20 @@
 package com.levibarker.lbkotlinbackend.controllers
 
+import com.levibarker.lbkotlinbackend.models.User
+import com.levibarker.lbkotlinbackend.persistence.entities.UserEntity
+import com.levibarker.lbkotlinbackend.persistence.repositories.UserRepository
 import com.levibarker.lbkotlinbackend.services.UserService
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("v1/fake")
 @CrossOrigin
-class FakeControllerV1(private val userService: UserService) {
+class FakeControllerV1(
+    private val userService: UserService,
+    private val userRepository: UserRepository,
+) {
 
     @GetMapping("/ok")
     fun getOkResponse(): ResponseEntity<Any> {
@@ -35,9 +38,13 @@ class FakeControllerV1(private val userService: UserService) {
     }
 
     @GetMapping("/users")
-    fun getUsers(@RequestParam("count") count: Int = 10): ResponseEntity<Any> {
-        return ResponseEntity
-            .ok()
-            .body(userService.generateSome(count))
+    fun getUsers(@RequestParam("count") count: Int = 10): ResponseEntity<List<User>> {
+        return ResponseEntity(userService.generateSome(count), HttpStatus.OK)
+    }
+
+    @PostMapping("/users")
+    fun createUser(@RequestBody user: UserEntity): ResponseEntity<UserEntity> {
+        val savedUser = userRepository.save(user)
+        return ResponseEntity(savedUser, HttpStatus.OK)
     }
 }
