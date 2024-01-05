@@ -12,11 +12,11 @@ data class UserEntity(
     val id: UUID = UUID.randomUUID(),
 
     @Column(name = "first_name", nullable = false)
-    val firstName: String,
+    val firstName: String?,
 
     @Column(name = "last_name", nullable = false)
-    val lastName: String,
+    val lastName: String?,
 
     @Column(name = "email", nullable = false, unique = true)
-    val email: String,
+    val email: String?,
 )
