@@ -30,9 +30,10 @@ dependencies {
 	implementation("io.ktor:ktor-client-json:$ktorVersion")
 	implementation("io.ktor:ktor-client-serialization:$ktorVersion")
 	implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-	implementation("io.ktor:ktor-client-apache5:$ktorVersion")
+	implementation("io.ktor:ktor-client-java:$ktorVersion")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.awaitility:awaitility:3.1.2")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

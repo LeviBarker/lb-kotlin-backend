@@ -5,7 +5,7 @@ import com.levibarker.lbkotlinbackend.models.NWSForecastResponse
 import com.levibarker.lbkotlinbackend.models.NWSPointResponse
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.engine.apache5.*
+import io.ktor.client.engine.java.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
@@ -21,7 +21,7 @@ interface WeatherService {
 @Service
 class HttpWeatherService : WeatherService {
 
-    private final val http = HttpClient(Apache5) {
+    private final val http = HttpClient(Java) {
         install(ContentNegotiation) {
             json(Json {
                 ignoreUnknownKeys = true

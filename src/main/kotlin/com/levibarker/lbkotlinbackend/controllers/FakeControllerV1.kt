@@ -3,7 +3,9 @@ package com.levibarker.lbkotlinbackend.controllers
 import com.levibarker.lbkotlinbackend.models.User
 import com.levibarker.lbkotlinbackend.persistence.entities.UserEntity
 import com.levibarker.lbkotlinbackend.persistence.repositories.UserRepository
+import com.levibarker.lbkotlinbackend.services.OpenAIService
 import com.levibarker.lbkotlinbackend.services.UserService
+import kotlinx.coroutines.runBlocking
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -13,8 +15,16 @@ import org.springframework.web.bind.annotation.*
 @CrossOrigin
 class FakeControllerV1(
     private val userService: UserService,
+    private val openAIService: OpenAIService,
     private val userRepository: UserRepository,
 ) {
+
+    @GetMapping("/ai")
+    fun getOpenAIResponse(@RequestParam("prompt") prompt: String): ResponseEntity<Any> = runBlocking {
+        val result = openAIService.chat(prompt)
+
+        return@runBlocking ResponseEntity.ok().body(result)
+    }
 
     @GetMapping("/ok")
     fun getOkResponse(): ResponseEntity<Any> {
