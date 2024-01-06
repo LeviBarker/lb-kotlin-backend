@@ -39,7 +39,7 @@ class HTTPOpenAIService(private val articleRepository: ArticleRepository) : Open
         }
 
         install(HttpTimeout) {
-            requestTimeoutMillis = 30_000
+            requestTimeoutMillis = 45_000
         }
 
         defaultRequest {
