@@ -54,7 +54,7 @@ class HTTPOpenAIService(private val articleRepository: ArticleRepository) : Open
 
     override suspend fun generateArticle(): ArticleEntity = coroutineScope {
         val mainJob =
-            async { chat("newspaper story for kids with an <h1> tag for the headline and <p> tags for the story limit prose") }
+            async { chat("newspaper story for kids with an <h1> tag for the headline and <p> tags for the story limit prose, choose from sports, science, art, or superheros") }
         val funFactJob = async { chat("science fact for 7 year old limit prose limit 500 characters") }
 
         val article = ArticleEntity()
